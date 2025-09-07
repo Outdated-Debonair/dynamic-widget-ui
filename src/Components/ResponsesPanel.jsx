@@ -29,14 +29,26 @@ export default function ResponsesPanel({ question }) {
     if (question.questiontype === "yesno" || question.questiontype === "radioBtn") {
         const yes = responses.filter((r) => r.radiobtn === true).length;
         const no = responses.filter((r) => r.radiobtn === false).length;
+ 
         return (
-            <div>
-                <h3>{question.questiontext}</h3>
-                <p>Yes: {((yes / responses.length) * 100).toFixed(1)}%</p>
-                <p>No: {((no / responses.length) * 100).toFixed(1)}%</p>
-                <p>Total responses: {responses.length}</p>
+            <div className="question-summary">
+                <h2 className="question-title poppins-thin">{question.questiontext}</h2>
+
+                <ul className="response-breakdown">
+                    <li className="response-yes">
+                        Yes: {((yes / responses.length) * 100).toFixed(1)}%
+                    </li>
+                    <li className="response-no">
+                        No: {((no / responses.length) * 100).toFixed(1)}%
+                    </li>
+                </ul>
+
+                <p className="total-responses">
+                    Total responses: <strong>{responses.length}</strong>
+                </p>
             </div>
         );
+
     }
 
     if (question.questiontype === "rating") {
@@ -44,15 +56,22 @@ export default function ResponsesPanel({ question }) {
             (r) => responses.filter((res) => res.ratingscale === r).length
         );
         return (
-            <div>
-                <h3>{question.questiontext}</h3>
-                {counts.map((c, i) => (
-                    <p key={i}>
-                        {i + 1}: {c} response{c !== 1 ? "s" : ""}
-                    </p>
-                ))}
-                <p>Total responses: {responses.length}</p>
+            <div className="question-summary">
+                <h2 className="question-title poppins-thin">{question.questiontext}</h2>
+
+                <ul className="response-list">
+                    {counts.map((count, index) => (
+                        <li key={`response-${index}`}>
+                            {index + 1}: {count} response{count !== 1 ? 's' : ''}
+                        </li>
+                    ))}
+                </ul>
+
+                <p className="total-responses">
+                    Total response: <strong>{responses.length}</strong>
+                </p>
             </div>
+
         );
     }
 

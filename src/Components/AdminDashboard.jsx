@@ -10,7 +10,6 @@ export default function AdminDashboard() {
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [editingQuestion, setEditingQuestion] = useState(null);
     const [showNewModal, setShowNewModal] = useState(false);
-    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -157,7 +156,7 @@ export default function AdminDashboard() {
     return (
         <div className="dashboard">
             <div className="header">
-                <h2>Manage Questions</h2>
+                <h2 className="poppins-regular">Manage Questions</h2>
                 <button className="new-btn" onClick={() => setShowNewModal(true)}>
                     + New Question
                 </button>

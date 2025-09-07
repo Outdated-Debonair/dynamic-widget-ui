@@ -6,7 +6,9 @@
     border-radius: 8px;
     font-family: Arial, sans-serif;
     margin-top: 3rem;
+    background-color: white;
 }
+
 .feedback-form-title {
     margin-bottom: 2rem;
 }
@@ -58,31 +60,107 @@ button[type="submit"]:hover {
 }
 
 .rating-scale {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
 }
 
 .rating-btn {
-  width: 40px;
-  height: 40px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.2s ease-in-out;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
 }
 
 .rating-btn:hover {
-  border-color: #007bff;
-  background-color: #eef6ff;
+    border-color: #007bff;
+    background-color: #eef6ff;
 }
 
 .rating-btn.selected {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-  transform: scale(1.1);
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: scale(1.1);
+}
+
+.response-yes {
+    font-weight: bold;
+    color: green;
+}
+
+.response-no {
+    font-weight: bold;
+    color: red;
+}
+
+.overall-response {
+    font-weight: bold;
+    color: #3c4b6a;
+}
+
+
+.question-summary {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.question-title {
+    margin-bottom: 1rem;
+}
+
+.response-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0 0 1rem 0;
+}
+
+.response-list li {
+    margin-bottom: 0.25rem;
+}
+
+.total-responses {
+    font-weight: 500;
+}
+
+.question-summary {
+    padding: 1rem;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.question-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.response-breakdown {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.response-breakdown li {
+    margin-bottom: 0.3rem;
+}
+
+.response-yes {
+    color: #2e7d32;
+    /* green */
+}
+
+.response-no {
+    color: #c62828;
+    /* red */
+}
+
+.total-responses {
+    font-weight: 500;
 }

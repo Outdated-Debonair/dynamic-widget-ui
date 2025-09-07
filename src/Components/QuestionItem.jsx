@@ -9,14 +9,14 @@ export default function QuestionItem({ question, onClick, onEdit, onUnpublish })
             </div> */}
             <div className="justify-between">
                 <div className="middle flex-col">
-                    <div className="">
-                        <h4>{question.questiontext}</h4>
+                    <div className=" ">
+                        <h4 className="poppins-extraThin">{question.questiontext}</h4>
                     </div>
                     <div className="flex-row-btn">
-                        <button onClick={(e) => { e.stopPropagation(); onEdit(); }}>Edit</button>
+                        <button className="btn-blue" onClick={(e) => { e.stopPropagation(); onEdit(); }}>Edit</button>
                         {question.status === "published" ?
-                            <button onClick={(e) => { e.stopPropagation(); onUnpublish(question.questionid, true); }}>Unpublish</button> :
-                            <button onClick={(e) => { e.stopPropagation(); onUnpublish(question.questionid, false); }}>Publish</button>
+                            <button className="unpublish-btn" onClick={(e) => { e.stopPropagation(); onUnpublish(question.questionid, true); }}>Unpublish</button> :
+                            <button className="publish-btn" onClick={(e) => { e.stopPropagation(); onUnpublish(question.questionid, false); }}>Publish</button>
                         }
 
                     </div>

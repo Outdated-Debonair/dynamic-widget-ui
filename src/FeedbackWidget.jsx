@@ -28,21 +28,6 @@ export default function FeedbackForm() {
 
         const eventSource = new EventSource("http://localhost:4000/api/events");
 
-        // eventSource.onmessage = (event) => {
-        //     try {
-        //         const newData = JSON.parse(event.data);
-        //         console.log("SSE new question:", newData);
-        //         // Add only if not already in the list
-        //         setQuestions((prev) => {
-        //             const exists = prev.some(q => q.questionid === newData.payload.questionid);
-        //             if (exists) return prev;
-        //             return [...prev, newData.payload];
-        //         });
-        //     } catch (e) {
-        //         console.error("Invalid SSE data:", e);
-        //     }
-        // };
-
         eventSource.onmessage = (event) => {
             try {
                 const newData = JSON.parse(event.data);
@@ -53,24 +38,20 @@ export default function FeedbackForm() {
                 setQuestions((prev) => {
                     switch (type) {
                         case "CREATE_QUESTION":
-                            // Add only if not already there
                             if (prev.some(q => q.questionid === payload.questionid)) return prev;
                             return [...prev, payload];
 
                         case "UPDATE_QUESTION":
-                            // Update text/status/type etc.
                             return prev.map(q =>
                                 q.questionid === payload.questionid ? { ...q, ...payload } : q
                             );
 
                         case "UNPUBLISH_QUESTION":
-                            // Mark as unpublished (but keep in list)
                             return prev.map(q =>
                                 q.questionid === payload.questionid ? { ...q, status: "unpublished" } : q
                             );
 
                         case "DELETE_QUESTION":
-                            // If you support deletes, remove completely
                             return prev.filter(q => q.questionid !== payload.questionid);
 
                         default:

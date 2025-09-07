@@ -4,6 +4,17 @@
     border-radius: 6%;
     padding: 5px;
     font-size: x-small;
+    border: none;
+    cursor: pointer;
+}
+.btn-blue {
+    color: white;
+    background: rgb(82, 82, 199);
+    border-radius: 10%;
+    padding: 5px 8px;
+    font-size: x-small;
+    border: none;
+    cursor: pointer;
 }
 
 .unpublish-btn {
@@ -11,7 +22,9 @@
     color: white;
     background: red;
     border-radius: 6%;
+    border: none;
     padding: 5px;
+    cursor: pointer;
 }
 
 .post-question-text {
