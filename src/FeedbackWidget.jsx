@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./FeedbackWidget.css";
 
-export default function FeedbackForm() {
+export  function FeedbackForm() {
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [questions, setQuestions] = useState([]);
@@ -50,7 +50,7 @@ export default function FeedbackForm() {
                             return prev.map(q =>
                                 q.questionid === payload.questionid ? { ...q, status: "unpublished" } : q
                             );
-                        
+
                         case "PUBLISH_QUESTION":
                             return prev.map(q =>
                                 q.questionid === payload.questionid ? { ...q, status: "published" } : q
@@ -259,6 +259,22 @@ export default function FeedbackForm() {
     //         </form>
     //     </div>
     // );
+}
+
+export default function FloatingButton() {
+    const [showFeedbackform, setVisibility] = useState(false);
+    return (
+        <>
+            <button className="floating-button" onClick={() => setVisibility(!showFeedbackform)}>
+                FB
+            </button>
+            {
+                showFeedbackform && 
+                    <FeedbackForm />
+            }
+        </>
+
+    );
 }
 
 
