@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function ResponsesPanel({ question }) {
+export default function ResponsesPanel({ question, updateResponse }) {
     const [responses, setResponses] = useState([]);
 
     useEffect(() => {
@@ -21,15 +21,14 @@ export default function ResponsesPanel({ question }) {
             }
         };
         fetchResponses();
-    }, [question]);
+    }, [question, updateResponse]);
 
     if (!responses.length) return <p>No responses yet.</p>;
 
-    // ✅ YES/NO
     if (question.questiontype === "yesno" || question.questiontype === "radioBtn") {
         const yes = responses.filter((r) => r.radiobtn === true).length;
         const no = responses.filter((r) => r.radiobtn === false).length;
- 
+
         return (
             <div className="question-summary">
                 <h2 className="question-title poppins-thin">{question.questiontext}</h2>

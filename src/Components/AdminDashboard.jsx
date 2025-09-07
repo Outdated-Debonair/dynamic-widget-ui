@@ -10,6 +10,7 @@ export default function AdminDashboard() {
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [editingQuestion, setEditingQuestion] = useState(null);
     const [showNewModal, setShowNewModal] = useState(false);
+    const [updateResponse, setUpdateResponse] = useState(false);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -42,12 +43,6 @@ export default function AdminDashboard() {
                 const newData = JSON.parse(event.data);
                 console.log("SSE event:", newData);
 
-                // Example newData:
-                // {
-                //   "type": "NEW_QUESTION" | "UPDATE_QUESTION" | "UNPUBLISH_QUESTION",
-                //   "payload": { ...question fields... }
-                // }
-
                 if (newData.type === "NEW_QUESTION") {
                     setQuestions((prev) => [...prev, newData.payload]);
                 }
@@ -76,6 +71,10 @@ export default function AdminDashboard() {
                     if (newData.payload.questionid === selectedQuestion.questionid) {
                         setSelectedQuestion((q) => ({ ...q }));
                     }
+                }
+
+                if(newData.type === "USER_RESPONSE") {
+                    setUpdateResponse(prev => !prev);
                 }
             } catch (err) {
                 console.error("Error parsing SSE message:", err);
@@ -177,7 +176,7 @@ export default function AdminDashboard() {
 
                 <div className="responses-panel">
                     {selectedQuestion ? (
-                        <ResponsesPanel question={selectedQuestion} />
+                        <ResponsesPanel question={selectedQuestion} updateResponse={updateResponse}/>
                     ) : (
                         <p>Select a question to view responses</p>
                     )}
