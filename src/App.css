@@ -1,0 +1,50 @@
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+.my-1 {
+  margin: 1rem 0;
+}
+
+.text-sm {
+  font-size: small;
+}
+
+.btn-red {
+  background: red;
+  padding: 1% 2%;
+  border-radius: 8%;
+  border: red;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-success {
+  background: green;
+  padding: 1% 2%;
+  border-radius: 8%;
+  border: green;
+  cursor: pointer;
+  color: white;
+}
+
+.modal textarea {
+  width: 100%;
+}
+
+.left {
+  margin: 1rem;
+}
+ 

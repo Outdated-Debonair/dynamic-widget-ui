@@ -1,0 +1,83 @@
+.publish-btn {
+    color: white;
+    background: green;
+    border-radius: 6%;
+    padding: 5px;
+    font-size: x-small;
+}
+
+.unpublish-btn {
+    font-size: x-small;
+    color: white;
+    background: red;
+    border-radius: 6%;
+    padding: 5px;
+}
+
+.post-question-text {
+    margin-bottom: 4%;
+}
+.post-question-text textarea {
+    width: 100%;
+}
+.textFieldRequired {
+    font-size: small;
+}
+.justify-between {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+.my-1 {
+  margin: 1rem 0;
+}
+
+.text-sm {
+  font-size: small;
+}
+
+.btn-red {
+  background: red;
+  padding: 1% 2%;
+  border-radius: 8%;
+  border: red;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-success {
+  background: green;
+  padding: 1% 2%;
+  border-radius: 8%;
+  border: green;
+  cursor: pointer;
+  color: white;
+}
+
+.modal textarea {
+  width: 100%;
+}
+
+.left {
+  margin: 1rem;
+}
+ 
