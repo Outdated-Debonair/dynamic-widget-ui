@@ -50,6 +50,11 @@ export default function FeedbackForm() {
                             return prev.map(q =>
                                 q.questionid === payload.questionid ? { ...q, status: "unpublished" } : q
                             );
+                        
+                        case "PUBLISH_QUESTION":
+                            return prev.map(q =>
+                                q.questionid === payload.questionid ? { ...q, status: "published" } : q
+                            );
 
                         case "DELETE_QUESTION":
                             return prev.filter(q => q.questionid !== payload.questionid);
@@ -111,78 +116,149 @@ export default function FeedbackForm() {
     }
 
     return (
-        <div>
+        <div className="feedback-container">
             <form className="feedback-form" onSubmit={handleSubmit}>
-                <h1 className="feedback-form-title">Feedback Form</h1>
+                <h1 className="feedback-form-title poppins-regular">Feedback Form</h1>
 
                 {questions
                     ?.filter((q) => q.status === "published")
-                    .map((q) => (
-                        <div key={q.questionid} className="question-block">
-                            <p>{q.questiontext}</p>
+                    .map((q, idx, arr) => (
+                        <div key={q.questionid}>
+                            <fieldset className="question-block">
+                                <legend className="question-text">{q.questiontext}</legend>
 
-                            {/* Yes/No */}
-                            {q.questiontype === "radioBtn" && (
-                                <div>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name={`question-${q.questionid}`}
-                                            value="yes"
-                                            checked={answers[q.questionid] === "yes"}
-                                            onChange={() => handleChange(q.questionid, "yes")}
-                                            required
-                                        />
-                                        Yes
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name={`question-${q.questionid}`}
-                                            value="no"
-                                            checked={answers[q.questionid] === "no"}
-                                            onChange={() => handleChange(q.questionid, "no")}
-                                            required
-                                        />
-                                        No
-                                    </label>
-                                </div>
-                            )}
+                                {q.questiontype === "radioBtn" && (
+                                    <div className="radio-group">
+                                        {["yes", "no"].map((option) => (
+                                            <label key={option} className="radio-option">
+                                                <input
+                                                    type="radio"
+                                                    name={`question-${q.questionid}`}
+                                                    value={option}
+                                                    checked={answers[q.questionid] === option}
+                                                    onChange={() => handleChange(q.questionid, option)}
+                                                    required
+                                                />
+                                                {option.charAt(0).toUpperCase() + option.slice(1)}
+                                            </label>
+                                        ))}
+                                    </div>
+                                )}
 
-                            {/* Rating 1-5 */}
-                            {q.questiontype === "rating" && (
-                                <div className="rating-scale">
-                                    {[1, 2, 3, 4, 5].map((rating) => (
-                                        <button
-                                            key={rating}
-                                            type="button"
-                                            className={`rating-btn ${answers[q.questionid] === rating ? "selected" : ""}`}
-                                            onClick={() => handleChange(q.questionid, rating)}
-                                        >
-                                            {rating}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
+                                {q.questiontype === "rating" && (
+                                    <div className="rating-scale">
+                                        {[1, 2, 3, 4, 5].map((rating) => (
+                                            <button
+                                                key={rating}
+                                                type="button"
+                                                className={`rating-btn ${answers[q.questionid] === rating ? "selected" : ""}`}
+                                                onClick={() => handleChange(q.questionid, rating)}
+                                                aria-label={`Rate ${rating} out of 5`}
+                                            >
+                                                {rating}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
 
+                                {q.questiontype === "text" && (
+                                    <textarea
+                                        rows="3"
+                                        className="text-feedback"
+                                        value={answers[q.questionid] || ""}
+                                        onChange={(e) => handleChange(q.questionid, e.target.value)}
+                                        placeholder="Write your feedback here..."
+                                        required={q.istextfieldrequired}
+                                    />
+                                )}
+                            </fieldset>
 
-                            {/* Text Field */}
-                            {q.questiontype === "text" && (
-                                <textarea
-                                    rows="3"
-                                    value={answers[q.questionid] || ""}
-                                    onChange={(e) => handleChange(q.questionid, e.target.value)}
-                                    placeholder="Write your feedback here..."
-                                    required={q.istextfieldrequired}
-                                />
-                            )}
+                            {/* Separator (not after the last item) */}
+                            {idx < arr.length - 1 && <hr className="question-separator" />}
                         </div>
                     ))}
 
-                <button type="submit">Submit Feedback</button>
+
+                <button type="submit" className="submit-btn">
+                    Submit Feedback
+                </button>
             </form>
         </div>
     );
+
+
+
+
+    // return (
+    //     <div>
+    //         <form className="feedback-form" onSubmit={handleSubmit}>
+    //             <h1 className="feedback-form-title">Feedback Form</h1>
+
+    //             {questions
+    //                 ?.filter((q) => q.status === "published")
+    //                 .map((q) => (
+    //                     <div key={q.questionid} className="question-block">
+    //                         <p>{q.questiontext}</p>
+
+    //                         {q.questiontype === "radioBtn" && (
+    //                             <div>
+    //                                 <label>
+    //                                     <input
+    //                                         type="radio"
+    //                                         name={`question-${q.questionid}`}
+    //                                         value="yes"
+    //                                         checked={answers[q.questionid] === "yes"}
+    //                                         onChange={() => handleChange(q.questionid, "yes")}
+    //                                         required
+    //                                     />
+    //                                     Yes
+    //                                 </label>
+    //                                 <label>
+    //                                     <input
+    //                                         type="radio"
+    //                                         name={`question-${q.questionid}`}
+    //                                         value="no"
+    //                                         checked={answers[q.questionid] === "no"}
+    //                                         onChange={() => handleChange(q.questionid, "no")}
+    //                                         required
+    //                                     />
+    //                                     No
+    //                                 </label>
+    //                             </div>
+    //                         )}
+
+    //                         {q.questiontype === "rating" && (
+    //                             <div className="rating-scale">
+    //                                 {[1, 2, 3, 4, 5].map((rating) => (
+    //                                     <button
+    //                                         key={rating}
+    //                                         type="button"
+    //                                         className={`rating-btn ${answers[q.questionid] === rating ? "selected" : ""}`}
+    //                                         onClick={() => handleChange(q.questionid, rating)}
+    //                                     >
+    //                                         {rating}
+    //                                     </button>
+    //                                 ))}
+    //                             </div>
+    //                         )}
+
+
+    //                         {q.questiontype === "text" && (
+    //                             <textarea
+    //                                 rows="3"
+    //                                 value={answers[q.questionid] || ""}
+    //                                 onChange={(e) => handleChange(q.questionid, e.target.value)}
+    //                                 placeholder="Write your feedback here..."
+    //                                 required={q.istextfieldrequired}
+    //                             />
+    //                         )}
+    //                     </div>
+    //                 ))}
+
+    //             <button type="submit">Submit Feedback</button>
+    //         </form>
+    //     </div>
+    // );
 }
 
 

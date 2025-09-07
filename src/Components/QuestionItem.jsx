@@ -21,9 +21,9 @@ export default function QuestionItem({ question, onClick, onEdit, onUnpublish })
 
                     </div>
                 </div>
-                <div className="right">
+                {/* <div className="right">
                     <p className={question.status == "published" ? "publish-btn" : "unpublish-btn"}> {status}</p>
-                </div>
+                </div> */}
             </div>
         </div>
     );
